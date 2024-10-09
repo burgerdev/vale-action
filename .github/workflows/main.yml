@@ -4,7 +4,7 @@ on: push
 jobs:
   vale:
     name: runner / vale
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v2
       - uses: ./ # Uses an action in the root directory
