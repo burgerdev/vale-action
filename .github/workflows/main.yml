@@ -7,6 +7,17 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v2
+      # Work around https://github.com/errata-ai/vale-action/issues/127.
+      - run: |
+          gempath="$HOME/.local/share/gem/ruby/3.2.0/bin"
+          if [ -d "$gempath" ]; then
+            echo "$gempath" >> $GITHUB_PATH
+          fi
+      # Work around https://github.com/errata-ai/vale-action/issues/128.
+      - run: |
+          venv="$HOME/.local/share/venv"
+          mkdir -p "$venv"
+          echo "$venv/bin" >> $GITHUB_PATH
       - uses: ./ # Uses an action in the root directory
         with:
           reporter: github-check

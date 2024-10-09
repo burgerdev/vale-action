@@ -51,6 +51,7 @@ function logIfDebug(msg: string) {
 export async function get(tok: string, dir: string): Promise<Input> {
   logIfDebug('Ensuring core python and ruby dependencies are present');
 
+  await exec.exec('bash', ['-c', 'echo $PATH; which pip']);
   await exec.exec('pip', ['install', 'docutils']);
   logIfDebug('`pip install docutils` complete');
 
